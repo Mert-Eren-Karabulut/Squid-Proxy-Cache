@@ -62,40 +62,38 @@ sudo nano /etc/squid/squid.conf
 
 In nano editor we can use Ctrl+W to find lines that we need.
 
-'''
-http_access allow localnet = remove the # symbol
-'''
+''' http_access allow localnet = remove the # symbol '''
 
-Find '''acl localnet''' section and add the line below
+Find ''' acl localnet ''' section and add the line below
 
 
-'''acl localnet src YOUR IP RANGE'''
+''' acl localnet src YOUR IP RANGE '''
 
-As example a typical home network uses '''192.168.1.0/24''' which means IP range from 192.168.1.0 to 192.168.1.255
+As example a typical home network uses ''' 192.168.1.0/24 ''' which means IP range from 192.168.1.0 to 192.168.1.255
 
 Important Note: If there is another network preset which uses 192.168.x.x pattern, remove that line because it will cause conflicts otherwise.
 
 Find
-'''# dns_v4_first off remove the # symbol and change off to on.'''
+''' # dns_v4_first off remove the # symbol and change off to on. '''
 
 Set
-'''Cache_mem 256 MB'''
+''' Cache_mem 256 MB '''
 
 Set
-'''Maximum_object_size 4096 MB'''
+''' Maximum_object_size 4096 MB '''
 
 Set
-'''Maximum_object_size_in_memory 8192 KB'''
+''' Maximum_object_size_in_memory 8192 KB '''
 
 As last step we will determine the cache directory
-'''Cache_dir ufs /var/spool/squid3 = 8192 (1st variable - this is 8192 MB)'''
+''' Cache_dir ufs /var/spool/squid3 = 8192 (1st variable - this is 8192 MB) '''
 8192MB in that command is the capacity of the cache. After this amount of space is occupied by Squid, Squid will start deleting from the oldest cache. If you are an advanced user you can change the cache directory. 
 
-In order to save press '''Ctrl+X''' and type '''y''' in order to exit Nano editor. 
+In order to save press ''' Ctrl+X ''' and type ''' y ''' in order to exit Nano editor. 
 
 
 We need to restart squid service to see changes.
-'''sudo service squid restart'''
+''' sudo service squid restart '''
 
 ## Step 4 
 
@@ -106,7 +104,7 @@ Setup is completed, now we need to set our devices to use the proxy server that 
 
 There are 2 ways of checking. You can download a file, delete it and download again to see if there is any speed difference.
 
-Other way is checking service from squid access log. To do so type '''sudo tail -f /var/log/squid/access.log''' and look for changes when you click on a website from a client device. You can also see HIT and MISSes from that document.
+Other way is checking service from squid access log. To do so type ''' sudo tail -f /var/log/squid/access.log ''' and look for changes when you click on a website from a client device. You can also see HIT and MISSes from that document.
 
 
 I tested the system with 50MB test file and it was nearly instant when I tried to download it the second time.
